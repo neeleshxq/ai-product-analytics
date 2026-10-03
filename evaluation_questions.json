@@ -1,0 +1,7 @@
+[
+  {"question": "What is the total number of orders?"},
+  {"question": "What are the top 10 product categories by number of order items?"},
+  {"question": "What are the top 5 product categories by revenue?"},
+  {"question": "What is the average review score?"},
+  {"question": "How many orders used each payment type?"}
+]
