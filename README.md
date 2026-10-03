@@ -1,11 +1,11 @@
 # AI Product Analytics Platform
 
-An AI-powered natural-language analytics platform that enables users to query structured e-commerce data using business questions instead of manually writing SQL. The system combines **schema-aware LLM-based SQL generation, SQL validation, analytical query execution, KPI analysis, and data-grounded insight generation** in an interactive Streamlit application.
+An AI-powered natural-language analytics platform that enables users to query structured tabular data using business questions instead of manually writing SQL. The system combines **schema-aware LLM-based SQL generation, SQL validation, analytical query execution, KPI analysis, and data-grounded insight generation** in an interactive Streamlit application.
 
 ## Architecture
 
-```text
-Olist E-Commerce Data
+```text id="f7k8y2"
+CSV / Tabular Data
         ↓
 Dynamic CSV Loader
         ↓
@@ -40,18 +40,18 @@ The LLM handles **user-intent understanding and SQL generation**, while **DuckDB
 * **Schema-Aware Generation** — dynamically extracts tables, columns, and data types and provides them as context to Gemini.
 * **SQL Validation** — parses generated queries with SQLGlot before execution.
 * **Read-Only Query Enforcement** — blocks destructive DML/DDL operations such as `INSERT`, `UPDATE`, `DELETE`, `DROP`, and `ALTER`.
-* **Dynamic Data Ingestion** — automatically discovers CSV files and loads them into DuckDB tables.
+* **Dynamic CSV Ingestion** — automatically discovers CSV files and loads them into DuckDB tables.
 * **KPI & Analytical Processing** — processes query results using Pandas for business-level analysis.
 * **Data-Grounded Insights** — generates explanations based on the actual query results.
 * **Evaluation Pipeline** — measures SQL validity, execution success, errors, and query latency.
 
 ## Dataset
 
-The project uses the **Olist Brazilian E-Commerce Public Dataset**, a relational e-commerce dataset containing customer, order, product, payment, and review information.
+The platform is designed to work with **general CSV/tabular datasets**. For demonstration and evaluation, this project uses the **Olist Brazilian E-Commerce Public Dataset**.
 
-Primary tables include:
+Primary Olist tables used include:
 
-```text
+```text id="gj6k1x"
 customers
 orders
 order_items
@@ -60,19 +60,19 @@ order_payments
 order_reviews
 ```
 
-CSV files are automatically discovered from the `data/` directory and loaded into DuckDB.
+CSV files are automatically discovered from the `data/` directory, allowing the same pipeline to be used with other compatible tabular datasets without changing the core ingestion architecture.
 
 ## Example Workflow
 
 **User Question**
 
-```text
+```text id="7o4t5d"
 What are the top 5 product categories by revenue?
 ```
 
 **Processing**
 
-```text
+```text id="w2x6t3"
 Natural Language Question
           ↓
 Schema-Aware Prompt
@@ -94,7 +94,7 @@ The dashboard displays the generated SQL, query results, and the resulting analy
 
 A predefined benchmark of analytical questions is stored in:
 
-```text
+```text id="y5f1c9"
 evaluation_questions.json
 ```
 
@@ -111,22 +111,22 @@ This provides a repeatable framework for analyzing failures in the natural-langu
 
 ## Tech Stack
 
-| Component       | Technology       |
-| --------------- | ---------------- |
-| Language        | Python           |
-| LLM             | Gemini API       |
-| Database        | DuckDB           |
-| SQL Validation  | SQLGlot          |
-| Data Processing | Pandas           |
-| Dashboard       | Streamlit        |
-| Dataset         | Olist E-Commerce |
+| Component             | Technology       |
+| --------------------- | ---------------- |
+| Language              | Python           |
+| LLM                   | Gemini API       |
+| Database              | DuckDB           |
+| SQL Validation        | SQLGlot          |
+| Data Processing       | Pandas           |
+| Dashboard             | Streamlit        |
+| Demonstration Dataset | Olist E-Commerce |
 
 ## Project Structure
 
-```text
+```text id="6sj2b8"
 ai-product-analytics/
 ├── data/
-│   └── Olist CSV files
+│   └── CSV files
 │
 ├── src/
 │   ├── database.py       # DuckDB setup and CSV ingestion
@@ -147,7 +147,7 @@ ai-product-analytics/
 
 Clone the repository and install dependencies:
 
-```bash
+```bash id="j5p7d4"
 git clone <repository-url>
 cd ai-product-analytics
 pip install -r requirements.txt
@@ -155,14 +155,14 @@ pip install -r requirements.txt
 
 Create a `.env` file in the project root:
 
-```text
+```text id="4t3z6a"
 GEMINI_API_KEY=your_api_key
 GEMINI_MODEL=gemini-3.8-flash
 ```
 
-Add the Olist CSV files to `data/` and launch the application:
+Place the CSV files you want to analyze inside `data/` and launch the application:
 
-```bash
+```bash id="s0w4f1"
 streamlit run app.py
 ```
 
